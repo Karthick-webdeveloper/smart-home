@@ -266,7 +266,7 @@ input:checked +.label1 svg.moon
     border-radius: 0px;
     align-items: center;
     justify-content: center;
-    z-index: 5;
+    z-index: 13;
     background-color: #151516;
     flex-direction: row;
     top: -15%;
@@ -453,19 +453,21 @@ input:checked + .label2{
 }
 .autoblur
 {
-    width: 1525px;
-    height: 730px;
+    width:100vw;
+    height: 100vh;
     background: linear-gradient(135deg,rgba(0, 0, 0, 0.525),rgba(225,225,225,0));
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(10px);
     transition: 0.5s ease;
-    position: absolute;
-    z-index: 4;
+    position: fixed;
+    z-index: 12;
     display: block;
     top: 0pc;
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
+    object-fit:contain;
+    left: 0;
 }
 .fanoff
 {
@@ -634,6 +636,27 @@ input:checked + .label3{
     text-transform: uppercase;
     line-height: 0.5em;
 }
+.button 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+}
+.button p
+{
+    position: absolute;
+    top: 100px;
+    color: #000000;
+    font-size: 18px;
+    z-index: 10;
+    font-weight: 600;
+    font-style: bold;
+    transform: rotateZ(270deg);
+    left: 33%;
+    padding: 5px 8px;
+}
 @media  screen and (min-width: 1600px)  {
     .ac-off2
     {
@@ -661,7 +684,7 @@ input:checked + .label3{
     {
         width: 1920px;
         height: 1080px;
-        z-index: 11;
+        z-index: 4;
     }
     .img-home
     {

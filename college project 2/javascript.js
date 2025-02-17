@@ -188,17 +188,41 @@ btn_4.addEventListener("change",function(){
 //btn_1.checked=true
 var hour =  document.getElementById("hours");
 var period =  document.getElementById("ampm");
-document.addEventListener("DOMContentLoaded",function(event){
-    if(hour = "06")
-    {
-        if(period ="PM")
-        {
-            btn_1.click()
+document.addEventListener("DOMContentLoaded", function () {
+    function updateButtonsBasedOnTime() {
+        let now = new Date();
+        let hour = now.getHours();
+        let period = hour >= 12 ? "PM" : "AM";
+        hour = hour % 12 || 12;
+
+        console.log("Current Time: ", hour, period);
+
+        if (hour >= 6 && period === "PM") {
+            btn_1.checked = true;
+            btn_3.checked = true;
+            btn_1.dispatchEvent(new Event("change"));
+            btn_3.dispatchEvent(new Event("change"));
+        } 
+        else if (hour >= 8 && hour < 6 && period === "AM") {
+            btn_1.checked = false;
+            btn_2.checked = false;
+            btn_1.dispatchEvent(new Event("change"));
+            btn_2.dispatchEvent(new Event("change"));
+        }
+
+        if (hour >= 8 && period === "PM") {
+            btn_2.disabled = false;
+            btn_2.click();
             btn_3.click();
-        }   
-    } 
-    else
-    {
-        btn_1.disable=true;
+
+        } else {
+            console.log("i see")
+        }
+
+        btn_4.checked = true;
+        btn_4.dispatchEvent(new Event("change"));
     }
-})
+
+    setInterval(updateButtonsBasedOnTime, 1000000);
+    updateButtonsBasedOnTime();
+});

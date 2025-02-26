@@ -10,14 +10,15 @@
     <header>
         <div class="smart-icon"><img src="home_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" alt="home svg" class="smartpng" style="fill: #f5f5dc;">
         <h1>Smart home</h1></div>
-        <div class="temperature-box"><h2 id="room_temperature" >Room temperature 22'C</h2><img src="cloud_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" class="cloudpng" style="fill: #f5f5dc;"></div>
+        <div class="temperature-box"><h2 id="room_temperature">Room temperature 22'C</h2><img src="cloud_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" class="cloudpng" style="fill: #f5f5dc;"></div>
         <p id="Date"></p>
         <p id="Day"></p>
         <div id="time"><p id="hours" style=" color: #11a355;"></p><p style=" color: #11a355;">/</p><p id="mins" style=" color: #11a355;" ></p><p style=" color: #11a355;">/</p><p id="sec" style=" color: #11a355;"></p><p style=" color: #11a355;">/</p><p id="ampm" style=" color: #11a355;">AM</p></div>
         <div class="control"><h2>Control</h2></div>
     </header>
     <div class="image-section">
-        <div class="image"><img src="New Project [5AE66C4].png" class="img-home" id="img-home"><img src="New Project [2DB2408].png" class="img-home" id="img-home-nigth"><img src="New Project [5BC879C].png" id="img-light" class="img-light"><img src="New Project 463 [47157B6].png" class="img-ac"><img src="giphy.gif" class="img_ac_on"></div>
+        <div class="image"><img src="New Project [5AE66C4].png" class="img-home" id="img-home" title="home"><img src="New Project [2DB2408].png" class="img-home" id="img-home-nigth"><img src="New Project [5BC879C].png" id="img-light" class="img-light"><img src="New Project 463 [47157B6].png" class="img-ac"><img src="giphy.gif" class="img_ac_on"><div class="button"><button><p style="text-transform: uppercase;">></button>
+        </p></div></div>
     </div>
     <div class="control-section"><div class="control-1"><h1 id="control-1-h1" style="transition: 0.8s;">Day</h1><input type="checkbox" id="check"><label class="label1" for="check"><svg class="sun" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -69,6 +70,13 @@
         <div class="control-5"><div class="circle" data-degree="92" data-color="skyblue"><h2 class="number">92<span>%</span></h2><h4>Water level</h4></div></div></div>
             <div class="msg"><div class="alert-msg"><h2 id="msg_h1"></h2><button onclick="clos()">Ok</button></div></div>
             <div class="autoblur" style="transition: 0.3s ease;"></div>
+
+        <div class="nofication-msg"><h1>Welcome to smart home</h1>
+         <h3>Weather in Chennai</h3>
+        <h4 class="temp"></h4>
+    <h4 class="condition"></h4>
+<h3>Have a nice day</h3>
+<button type="submit" class="btn_final" onclick="closee()">close</button></div>
     <script src="javascript.js"></script>
      <script src="javascript_2.js"></script>
 </body>

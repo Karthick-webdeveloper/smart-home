@@ -24,13 +24,15 @@ var date = new Date();
 var hour = date.getHours();
 var min = date.getMinutes();
 var sec = date.getSeconds();
+var ampm=document.getElementById("ampm")
+ampm.innerHTML = hour >= 12 ? "PM" : "AM";
     if(hour == 0){
         hour=12;
     }
     if (hour>12)
     {
         hour=hour-12;
-        document.getElementById("ampm").innerHTML="PM";
+        ampm.innerHTML="PM"
     }
     if(hour < 10)
     {
@@ -85,6 +87,26 @@ function clos()
 {
     alert_msg.style.top="-15%";
 }
+function closee()
+{
+    document.querySelector(".nofication-msg").style.visibility ="hidden"
+    document.querySelector(".nofication-msg").style.opacity="0"
+    autoblur.style.opacity = "0";
+    autoblur.style.visibility = "hidden";
+}
+document.querySelector(".nofication-msg").addEventListener("mouseover", function() {
+    autoblur.style.opacity = "1"; 
+    autoblur.style.visibility = "visible"; // Make it interactable
+});
+document.querySelector(".nofication-msg").addEventListener("mouseout", function() {
+    autoblur.style.opacity = "0";
+    autoblur.style.visibility = "hidden";
+    nofication.style.opacity="1"
+});
+alert_msg.addEventListener("mouseout", function() {
+    autoblur.style.opacity = "0";
+    autoblur.style.visibility = "hidden";
+});
 const btn_2 = document.getElementById("Ac-check")
 btn_2.addEventListener("change",function(){
     if(this.checked)
@@ -186,43 +208,75 @@ btn_4.addEventListener("change",function(){
     }
 })
 //btn_1.checked=true
-var hour =  document.getElementById("hours");
-var period =  document.getElementById("ampm");
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded",function () {
     function updateButtonsBasedOnTime() {
         let now = new Date();
         let hour = now.getHours();
         let period = hour >= 12 ? "PM" : "AM";
-        hour = hour % 12 || 12;
+        let formattedHour = hour % 12 || 12;
 
-        console.log("Current Time: ", hour, period);
+        console.log("Current Time: ", formattedHour, period);
 
-        if (hour >= 6 && period === "PM") {
-            btn_1.checked = true;
-            btn_3.checked = true;
-            btn_1.dispatchEvent(new Event("change"));
-            btn_3.dispatchEvent(new Event("change"));
-        } 
-        else if (hour >= 8 && hour < 6 && period === "AM") {
+        if (formattedHour >= 7 && period === "AM") {
             btn_1.checked = false;
             btn_2.checked = false;
-            btn_1.dispatchEvent(new Event("change"));
-            btn_2.dispatchEvent(new Event("change"));
+            btn_3.checked = false;
+            btn_4.checked = true;
+            btn_4.click()
+            console.log("It's morning");
         }
-
-        if (hour >= 8 && period === "PM") {
-            btn_2.disabled = false;
-            btn_2.click();
-            btn_3.click();
-
-        } else {
-            console.log("i see")
+        else if (formattedHour >= 6 && formattedHour < 9 && period === "PM") {
+            btn_1.checked = true;
+            btn_3.checked = true;
+            btn_2.checked = false;
+            btn_4.checked = true;
+            btn_4.click();
+            console.log("It's evening");
         }
-
-        btn_4.checked = true;
-        btn_4.dispatchEvent(new Event("change"));
+        else if ((formattedHour >= 9 && formattedHour <= 11) && period === "PM") {
+            btn_1.checked = true;
+            btn_2.checked = true;
+            btn_3.checked = true;
+            btn_4.checked = true;
+            console.log("Overnight");
+        }
+        else if(formattedHour >=8 && period=="PM")
+        {
+            btn_4.checked=true
+            console.log("its afternoon")
+        }
+        btn_4.click()
     }
 
-    setInterval(updateButtonsBasedOnTime, 1000000);
+    setInterval(updateButtonsBasedOnTime, 600000);
     updateButtonsBasedOnTime();
 });
+
+const API_KEY = "fb53e44c02b9b2d1237e6fcc23d5105b";
+const CITY = "Chennai";
+const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric`;
+
+fetch(URL)
+    .then(response => response.json())
+    .then(data => {
+        document.querySelector(".temp").textContent = `temperature ${data.main.temp}`;
+        document.getElementById("room_temperature").textContent = `Room temperature ${data.main.temp}`;
+        document.querySelector(".condition").textContent = data.weather[0].description +" ⛅";
+    })
+    .catch(error => console.error("Error fetching weather data:", error));
+
+
+
+const nofication =document.querySelector(".nofication-msg")
+window.onload = ()=>
+{
+    nofication.style.visibility ="visible"
+    nofication.style.opacity="1"
+}
+addEventListener("change",function(){
+    if((btn_1.checked && btn_3.checked)&&btn_2.checked)
+        {
+            img_ac.style.filter = 'brightness(25%)';
+            console.log("on")
+        }
+})
